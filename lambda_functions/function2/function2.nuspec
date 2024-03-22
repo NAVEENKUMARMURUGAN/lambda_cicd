@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>function2</id>
+    <version>1.0.0</version>
+    <authors>YourName</authors>
+    <description>Package for function2 Lambda function</description>
+  </metadata>
+  <files>
+    <file src="lambda_functions\function2\lambda_function.py" target="." />
+    <file src="lambda_functions\function2\requirements.txt" target="." />
+    <file src="lambda_functions\function2\dependencies\*" target="dependencies" />
+  </files>
+</package>
