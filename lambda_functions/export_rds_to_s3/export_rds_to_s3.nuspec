@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>export_rds_to_s3</id>
+    <version>1.0.0</version>
+    <authors>Naveenkumar Murugan</authors>
+    <description>Package for export_rds_to_s3 Lambda function</description>
+  </metadata>
+  <files>
+    <file src="lambda_functions\export_rds_to_s3\lambda_function.py" target="." />
+    <file src="lambda_functions\export_rds_to_s3\requirements.txt" target="." />
+  </files>
+</package>

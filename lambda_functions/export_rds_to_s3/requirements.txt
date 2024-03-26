@@ -1,0 +1,5 @@
+﻿aws-psycopg2
+boto3
+pandas
+s3fs
+fsspec
