@@ -3,6 +3,7 @@ FROM ubuntu:latest
 
 # Set environment variable to prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LAMBDA_FUNCTIONS_DIR /lambda_functions
 
 # Install required packages
 RUN apt-get update && \
