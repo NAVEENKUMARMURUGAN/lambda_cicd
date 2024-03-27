@@ -7,6 +7,6 @@
     <description>Package for export_rds_to_s3 Lambda function</description>
   </metadata>
   <files>
-    <file src="export_rds_to_s3/export_rds_to_s3.zip" target="." />
+    <file src="./export_rds_to_s3/export_rds_to_s3.zip" target="." />
   </files>
 </package>
