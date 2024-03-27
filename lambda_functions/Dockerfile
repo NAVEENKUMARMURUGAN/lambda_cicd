@@ -12,6 +12,7 @@ RUN apt-get update && \
     python3.10-distutils \
     python3.10-dev \
     python3.10-venv \
+    python3-pip \
     zip \
     nuget
 
