@@ -22,8 +22,10 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
 # Create the directory structure
 RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
 
-# Copy the current directory contents into the container
-COPY . $LAMBDA_FUNCTIONS_DIR
+COPY export_rds_to_s3 /lambda_functions/export_rds_to_s3
+COPY get_secret /lambda_functions/get_secret
+COPY Dockerfile /lambda_functions/Dockerfile
+COPY teamcity-services.yml /lambda_functions/teamcity-services.yml
 
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
