@@ -7,7 +7,6 @@
     <description>Package for export_rds_to_s3 Lambda function</description>
   </metadata>
   <files>
-    <file src="lambda_functions\export_rds_to_s3\lambda_function.py" target="." />
-    <file src="lambda_functions\export_rds_to_s3\requirements.txt" target="." />
+    <file src="lambda_functions\export_rds_to_s3\export_rds_to_s3.zip" target="." />
   </files>
 </package>
