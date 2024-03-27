@@ -34,6 +34,12 @@ COPY teamcity-services.yml /lambda_functions/teamcity-services.yml
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
 
+#Print Current working Directory
+RUN pwd
+
+RUN ls -lrt
+
+
 # Install Python dependencies for each Lambda function
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         cd $function_dir && \
@@ -48,6 +54,8 @@ RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'
         nuget pack "$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
         cd ..; \
     done
+
+RUN ls -lrt
 
 # Copy NuGet packages to the output directory
 RUN cp $LAMBDA_FUNCTIONS_DIR/**/*.nupkg $OUTPUT_DIR
