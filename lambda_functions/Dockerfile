@@ -26,31 +26,28 @@ ENV LAMBDA_FUNCTIONS_DIR /lambda_functions
 RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
 
 # Copy the lambda_functions directory into the container
-COPY ../lambda_functions $LAMBDA_FUNCTIONS_DIR
+COPY lambda_functions /lambda_functions
 
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
 
 # Install Python dependencies for each Lambda function
-RUN for function_dir in $(find . -maxdepth 1 -type d -not -name '.*'); do \
+RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         cd $function_dir && \
         pip3 install -r requirements.txt -t . && \
         cd ..; \
     done
 
 # Package Lambda functions and put them in NuGet packages
-RUN for function_dir in $(find . -maxdepth 1 -type d -not -name '.*'); do \
+RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         cd $function_dir && \
         zip -r "$function_dir.zip" * && \
-        nuget pack "$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
+        nuget pack "$function_dir/$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
         cd ..; \
     done
 
 # Copy NuGet packages to the output directory
-RUN cp *.nupkg $OUTPUT_DIR
+RUN cp $LAMBDA_FUNCTIONS_DIR/**/*.nupkg $OUTPUT_DIR
 
 # Set the output directory as the working directory
 WORKDIR $OUTPUT_DIR
-
-# Entry point command (optional)
-# CMD ["/bin/bash"]
