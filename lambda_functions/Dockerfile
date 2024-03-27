@@ -25,6 +25,7 @@ RUN if [ ! -e /usr/bin/python3 ]; then \
 
 # Create the directory structure
 RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
+RUN mkdir -p $OUTPUT_DIR
 
 COPY export_rds_to_s3 /lambda_functions/export_rds_to_s3
 COPY get_secret /lambda_functions/get_secret
