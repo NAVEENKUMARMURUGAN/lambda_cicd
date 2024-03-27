@@ -1,9 +1,8 @@
 # Use Ubuntu as base image
 FROM ubuntu:latest
 
-# Set up environment variables
-ENV LAMBDA_FUNCTIONS_DIR /lambda_functions
-ENV OUTPUT_DIR /output
+# Set environment variable to prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages
 RUN apt-get update && \
