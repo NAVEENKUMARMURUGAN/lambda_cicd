@@ -42,8 +42,8 @@ RUN ls -lrt
 
 # Install Python dependencies for each Lambda function
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
-  pip3 install -r "$function_dir/requirements.txt"; \
-done
+        pip3 install -r "$function_dir/requirements.txt"; \
+    done
 
 # Package Lambda functions and put them in NuGet packages
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
