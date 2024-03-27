@@ -19,14 +19,11 @@ RUN apt-get update && \
 RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
     ln -s /usr/bin/pip3.10 /usr/bin/pip3
 
-# Set up environment variables
-ENV LAMBDA_FUNCTIONS_DIR /lambda_functions
-
 # Create the directory structure
 RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
 
-# Copy the lambda_functions directory into the container
-COPY lambda_functions /lambda_functions
+# Copy the current directory contents into the container
+COPY . $LAMBDA_FUNCTIONS_DIR
 
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
@@ -42,7 +39,7 @@ RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         cd $function_dir && \
         zip -r "$function_dir.zip" * && \
-        nuget pack "$function_dir/$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
+        nuget pack "$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
         cd ..; \
     done
 
