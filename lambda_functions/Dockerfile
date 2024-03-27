@@ -15,8 +15,10 @@ RUN apt-get update && \
     nuget
 
 # Alias python3.10 to python3 and pip3.10 to pip3
-RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
-    ln -s /usr/bin/pip3.10 /usr/bin/pip3
+RUN if [ ! -e /usr/bin/python3 ]; then \
+        ln -s /usr/bin/python3.10 /usr/bin/python3; \
+    fi && \
+    ln -sf /usr/bin/pip3.10 /usr/bin/pip3
 
 # Create the directory structure
 RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
