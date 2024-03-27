@@ -49,10 +49,9 @@ RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'
 
 # Package Lambda functions and put them in NuGet packages
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
-        pushd $function_dir && \
+        (cd $function_dir && \
         zip -r "$function_dir.zip" * && \
-        nuget pack "$function_dir.nuspec" -OutputDirectory $OUTPUT_DIR && \
-        popd; \
+        nuget pack "$function_dir.nuspec" -OutputDirectory /output); \
     done
 
 RUN ls -lrt
