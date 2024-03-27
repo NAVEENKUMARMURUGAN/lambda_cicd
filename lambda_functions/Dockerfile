@@ -20,7 +20,7 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
     ln -s /usr/bin/pip3.10 /usr/bin/pip3
 
 # Copy the lambda_functions directory into the container
-COPY lambda_functions $LAMBDA_FUNCTIONS_DIR
+COPY . $LAMBDA_FUNCTIONS_DIR
 
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
