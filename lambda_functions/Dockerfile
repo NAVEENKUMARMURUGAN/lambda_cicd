@@ -19,6 +19,12 @@ RUN apt-get update && \
 RUN ln -s /usr/bin/python3.10 /usr/bin/python3 && \
     ln -s /usr/bin/pip3.10 /usr/bin/pip3
 
+# Set up environment variables
+ENV LAMBDA_FUNCTIONS_DIR /lambda_functions
+
+# Create the directory structure
+RUN mkdir -p $LAMBDA_FUNCTIONS_DIR
+
 # Copy the lambda_functions directory into the container
 COPY ../lambda_functions $LAMBDA_FUNCTIONS_DIR
 
