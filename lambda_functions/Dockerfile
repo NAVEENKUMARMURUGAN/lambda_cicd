@@ -51,7 +51,7 @@ RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         (cd $function_dir && \
         zip -r "$function_dir.zip" * && \
-        nuget pack "$function_dir.nuspec" -OutputDirectory /output); \
+        nuget pack "$function_dir.nuspec"); \
     done
 
 RUN ls -lrt
