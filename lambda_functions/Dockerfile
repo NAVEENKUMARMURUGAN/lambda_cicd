@@ -29,8 +29,7 @@ RUN mkdir -p $OUTPUT_DIR
 
 COPY export_rds_to_s3 /lambda_functions/export_rds_to_s3
 COPY get_secret /lambda_functions/get_secret
-COPY Dockerfile /lambda_functions/Dockerfile
-COPY teamcity-services.yml /lambda_functions/teamcity-services.yml
+
 
 # Set the working directory
 WORKDIR $LAMBDA_FUNCTIONS_DIR
