@@ -39,8 +39,6 @@ RUN pwd
 
 RUN ls -lrt
 
-RUN temp_dir=$(mktemp -d)
-
 # # Install Python dependencies for each Lambda function
 # RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
 #         (cd $function_dir && \
@@ -67,7 +65,7 @@ RUN temp_dir=$(mktemp -d)
 
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         mkdir -p "$function_dir/package" && \
-        cp -rv . `ls -a | grep -ve "$function_dir/package/"` "$function_dir/package/"&& \
+        rsync -av --exclude='package' "$function_dir/*" "$function_dir/package/" && \
         pip3 install -r "$function_dir/package/requirements.txt" -t "$function_dir/package" && \
         zip -r "$function_dir.zip" "$function_dir/package/"* && \
         nuget pack "$function_dir.nuspec"; \
