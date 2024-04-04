@@ -57,6 +57,3 @@ RUN ls -lrt
 
 # Copy NuGet packages to the output directory
 RUN cp -r $LAMBDA_FUNCTIONS_DIR/* $OUTPUT_DIR
-
-# Set the output directory as the working directory
-WORKDIR $OUTPUT_DIR
