@@ -65,14 +65,13 @@ RUN temp_dir=$(mktemp -d)
 #     rm -r $function_temp_dir; \
 #     done
 
-RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
+RUN for function_dir in $(find ./functions -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
         mkdir -p "$function_dir/package" && \
-        cp -r "$function_dir"/* "$function_dir/package" && \
+        cp -r "$function_dir"/* "$function_dir/package/" && \
         pip3 install -r "$function_dir/package/requirements.txt" -t "$function_dir/package" && \
         zip -r "$function_dir.zip" "$function_dir/package/"* && \
         nuget pack "$function_dir.nuspec"; \
     done
-
 
 # # Package Lambda functions and put them in NuGet packages
 # RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
