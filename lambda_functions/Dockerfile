@@ -56,7 +56,7 @@ RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'
 RUN ls -lrt
 
 # Copy NuGet packages to the output directory
-RUN cp $LAMBDA_FUNCTIONS_DIR $OUTPUT_DIR
+RUN cp -r $LAMBDA_FUNCTIONS_DIR/* $OUTPUT_DIR
 
 # Set the output directory as the working directory
 WORKDIR $OUTPUT_DIR
