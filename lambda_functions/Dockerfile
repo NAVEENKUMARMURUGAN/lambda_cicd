@@ -50,19 +50,27 @@ RUN temp_dir=$(mktemp -d)
 #         nuget pack "$function_dir.nuspec"); \
 #     done
 
+# RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
+#     # Create a unique temporary directory for each function
+#     function_temp_dir=$(mktemp -d) && \ 
+#     # Copy files to the temporary directory
+#     cp -r $function_dir/* $function_temp_dir && \ 
+#     # Install Python dependencies for the Lambda function
+#     pip3 install -r $function_temp_dir/requirements.txt -t $function_temp_dir && \  
+#     # Create a ZIP file for the Lambda function
+#     zip -r "$function_dir.zip" $function_temp_dir/* && \
+#     # Pack a NuGet package for the Lambda function
+#     nuget pack "$function_dir.nuspec" && \
+#     # Clean up the temporary directory for the function
+#     rm -r $function_temp_dir; \
+#     done
+
 RUN for function_dir in $(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*'); do \
-    # Create a unique temporary directory for each function
-    function_temp_dir=$(mktemp -d) && \ 
-    # Copy files to the temporary directory
-    cp -r $function_dir/* $function_temp_dir && \ 
-    # Install Python dependencies for the Lambda function
-    pip3 install -r $function_temp_dir/requirements.txt -t $function_temp_dir && \  
-    # Create a ZIP file for the Lambda function
-    zip -r "$function_dir.zip" $function_temp_dir/* && \
-    # Pack a NuGet package for the Lambda function
-    nuget pack "$function_dir.nuspec" && \
-    # Clean up the temporary directory for the function
-    rm -r $function_temp_dir; \
+        mkdir -p "$function_dir/package" && \
+        cp -r "$function_dir"/* "$function_dir/package" && \
+        pip3 install -r "$function_dir/package/requirements.txt" -t "$function_dir/package" && \
+        zip -r "$function_dir.zip" "$function_dir/package/"* && \
+        nuget pack "$function_dir.nuspec"; \
     done
 
 
